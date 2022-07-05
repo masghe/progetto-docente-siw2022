@@ -1,0 +1,56 @@
+<html>
+
+<head th:replace="fragments/base.html :: headerfiles(title='Aggiungi Piatto | Catering')">
+	<title>Modifica | Catering </title>
+</head>
+
+<body>
+	<div id="content">
+		<header th:replace="fragments/base.html :: navbar"></header>
+		<!--- MAIN -->
+		<div
+			th:replace="fragments/base.html :: page-title-section(image='/images/catering.webp',type='has-text-white',title='Modifica il tuo Profilo '+ ${loggedUser.nome.toUpperCase()} +'👋',subtitle='')">
+		</div>
+		<div class="ct-flex-container">
+			<div class="ct-flex-item">
+				<div class="section p-5">
+					<h2 class="title is-5">Modifica Profilo 👨 <span th:text="${loggedUser.nome}"></span></h2>
+					<p class="subtitle is-6">Stai aggiornando il tuo profilo</p>
+				</div>
+				<div class="section pt-0 pb-4">
+					<form th:action="@{/user/update}" method="POST" th:object="${newCredentials}">
+						<div class="field">
+
+						</div>
+						<div class="field">
+								<div class="control">
+								<label class="label">Username</label>
+								<span><input class="input" type="text" placeholder="Username"
+										th:field="*{username}" required /></span>
+								</div>
+								<p class="has-text-left help is-danger" th:if= "${#fields.hasErrors('username')}"
+									th:errors="*{username}" th:style="'color:red'">
+ 						</div> 	
+					    <div class="field">
+								<div class="control">
+								<label class="label">Password</label>
+								<span><input class="input" type="text" placeholder="Password"
+										th:field="*{password}" required /></span>
+								</div>
+								<p class="has-text-left help is-danger" th:if= "${#fields.hasErrors('password')}"
+									th:errors="*{password}" th:style="'color:red'">
+ 						</div> 	
+						<div class="level is-mobile">
+							<div class="level-left">
+								<button class="button is-rounded is-info"
+									type="submit">Salva</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<footer th:replace="fragments/base.html :: footer"></footer>
+	</div>
+</body>
+</html>

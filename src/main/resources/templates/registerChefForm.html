@@ -1,0 +1,62 @@
+<html>
+
+<head th:replace="fragments/base.html :: headerfiles(title='Aggiungi chef | Catering')">
+	<title>Aggiungi Chef | Catering </title>
+</head>
+
+<body>
+	<div id="content">
+		<header th:replace="fragments/base.html :: navbar"></header>
+		<!--- MAIN -->
+		<div
+			th:replace="fragments/base.html :: page-title-section(image='/images/chefs.webp',type='has-text-white',title='Registra un nuovo chef',subtitle='Puoi aggiungere un nuovo chef')">
+		</div>
+		<div class="ct-flex-container">
+			<div class="ct-flex-item">
+				<div class="section p-5">
+					<h2 class="title is-5">Dettagli chef</h2>
+					<p class="subtitle is-6">Fornisci tutte le informazioni per aggiungere un nuovo chef</p>
+				</div>
+				<div class="section pt-0 pb-4">
+					<form th:action="@{/admin/registerChef}" method="POST" th:object="${chefForm}">
+						<div class="field">
+							<div class="control">
+								<label class="label">Nome</label>
+								<span><input class="input" type="text" placeholder="Nome chef"
+										th:field="*{nome}" required /></span>
+							</div>
+								<p class="has-text-left help is-danger" th:if= "${#fields.hasErrors('nome')}"
+									th:errors="*{nome}" th:style="'color:red'">
+ 						</div> 						
+ 						<div class="field">
+							<div class="control">
+								<label class="label">Cognome:</label>
+								<span><input class="input" type="text" placeholder="COGNOME" 
+										required th:field="*{cognome}"/></span>
+							</div>
+								<p class="has-text-left help is-danger" th:if= "${#fields.hasErrors('cognome')}"
+									th:errors="*{cognome}" th:style="'color:red'">
+ 						</div>
+ 						<div class="field">
+							<div class="control">
+								<label class="label">Nazionalità:</label>
+								<span><input class="input" type="text" placeholder="NAZIONALITA" 
+										required th:field="*{nazionalita}"/>
+							</div>
+								<p class="has-text-left help is-danger" th:if= "${#fields.hasErrors('nazionalita')}"
+									th:errors="*{nazionalita}" th:style="'color:red'">
+ 						</div>
+						<div class="level is-mobile">
+							<div class="level-left">
+								<button class="button is-rounded is-info" type="submit">Conferma</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<footer th:replace="fragments/base.html :: footer"></footer>
+	</div>
+</body>
+
+</html>

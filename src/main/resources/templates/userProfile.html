@@ -1,0 +1,50 @@
+<html>
+
+<head th:replace="fragments/base.html :: headerfiles(title='Buffet | Catering')">
+	<title>Profilo | Catering </title>
+</head>
+
+<body>
+	<div id="content">
+		<header th:replace="fragments/base.html :: navbar"></header>
+		<!--- MAIN -->
+		<div
+			th:replace="fragments/base.html :: page-title-section(image='/images/chefs.webp',type='has-text-white',title='Benvenuto sul tuo Profilo ' + ${loggedCredentials.username.toUpperCase()} ,subtitle='Puoi modificare il tuo profilo')">
+		</div>
+		<!--- MAIN -->
+		<div class="ct-flex-container">
+			<div class="ct-flex-item">
+				<div class="section p-5">
+					<h2 class="title is-5"><span class="mr-1"></span>Il tuo profilo</h2>
+					<p class="subtitle is-6">Qui puoi vedere tutte le informazioni sul tuo profilo e nel caso modificarlo</p>
+				</div>
+						<div class="section pt-0 pb-5 pl-5 pr-5">
+					<a class="media media-chef">
+						<div class="media-left">
+							<div class="media-left-badge">
+								<p th:text=" '#' + ${loggedCredentials.id}">#ID</p>
+							</div>
+						</div>
+						<div class="media-content">
+						   Username: <p class="title is-6" th:text="${loggedCredentials.username}">Username User</p>
+						   Nome: <p class="title is-6" th:text="${loggedUser.nome}">Nome User</p>
+						   Cognome:<p class="title is-6" th:text="${loggedUser.cognome}">Cognome User</p>
+						   Ruolo:<p class="title is-6" th:text="${loggedCredentials.ruolo}">Cognome User</p>
+
+						</div>
+						<div class="media-right">
+							<form style="display: inline;" method="GET"
+								th:action="@{'/user/update'}">
+								<button class="button is-danger is-rounded " type="submit">Modifica Profilo </button>
+							</form>
+						</div>
+						<div class="media-right"><i class="fa-solid fa-chevron-right"></i></div>
+					</a>
+
+				</div>
+			</div>
+		</div>
+		<footer th:replace="fragments/base.html :: footer"></footer>
+	</div>
+</body>
+</html>

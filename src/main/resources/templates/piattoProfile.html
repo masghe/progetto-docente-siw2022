@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<html>
+
+<head th:replace="fragments/base.html :: headerfiles(title='Piatti | Catering')">
+	<title>Piatto | Catering </title>
+</head>
+
+<body>
+	<div id="content">
+		<header th:replace="fragments/base.html :: navbar"></header>
+		<!--- MAIN -->
+		<div
+			th:replace="fragments/base.html :: page-title-section(image='/images/chefs.webp',type='has-text-white',title='Gli Ingredienti del Buffet ' + ${loggedPiatto.nome.toUpperCase()},subtitle=${loggedPiatto.descrizione})">
+		</div>
+		<!--- MAIN -->
+		<div class="ct-flex-container">
+			<div class="ct-flex-item">
+				<div class="section p-5">
+					<h2 class="title is-5"><span class="mr-1">🥬 </span>Ingredienti disponibili</h2>
+					<p class="subtitle is-6">Qui puoi vedere tutti gli Ingredienti utilizzati nel Piatto</p>
+				</div>
+				<div class="section pt-0 pb-5 pl-5 pr-5">
+					<a class="media media-chef" th:if="${!ingredienteList.empty}" th:each="loggedeIng : ${ingredienteList}">
+						<div class="media-left">
+							<div class="media-left-badge">
+								<p th:text=" '#' + ${loggedeIng.id}">#ID</p>
+							</div>
+						</div>
+						<div class="media-content">
+							<p class="title is-6" th:text="${loggedeIng.nome}">Nome Ingrediente</p>
+							<p class="subtitle is-6" th:text="${loggedeIng.descrizione}">Descrizione Ingrediente</p>
+						</div>
+						<div class="media-right">
+							<form style="display: inline;" method="POST"
+								th:action="@{'/admin/'+${loggedPiatto.id}+'/allIngredienti/'+${loggedeIng.id}+'/delete'}">
+								<button class="button is-danger is-rounded " type="submit">Elimina </button>
+							</form>
+						</div>
+						<div class="media-right"><i class="fa-solid fa-chevron-right"></i></div>
+					</a>
+					<div th:unless="${!ingredienteList.empty}">
+						<div th:replace="fragments/base.html :: alert(text='Non ci sono piatti disponibili')" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="ct-flex-item">
+				<a th:href="@{'/admin/'+${loggedPiatto.id}+'/registerIngrediente'}" class="media p-5">
+					<div class="media-left">
+						<p class="title is-3">🥬</p>
+					</div>
+					<div class="media-content">
+						<p class="title is-5">Aggiungi Ingrediente</p>
+					</div>
+					<div class="media-left">
+						<i class="fa-solid fa-chevron-right"></i>
+					</div>
+				</a>
+			</div>
+		<footer th:replace="fragments/base.html :: footer"></footer>
+	</div>
+</body>
+
+</html>
+
+				

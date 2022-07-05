@@ -1,0 +1,52 @@
+<html>
+
+<head th:replace="fragments/base.html :: headerfiles(title='Buffet | Catering')">
+	<title>Admin All Users | Catering </title>
+</head>
+
+<body>
+	<div id="content">
+		<header th:replace="fragments/base.html :: navbar"></header>
+		<!--- MAIN -->
+		<div
+			th:replace="fragments/base.html :: page-title-section(image='/images/chefs.webp',type='has-text-white',title='Utenti Registrati',subtitle='Tutti gli utenti che si sono autenticati')">
+		</div>
+		<!--- MAIN -->
+		<div class="ct-flex-container">
+			<div class="ct-flex-item">
+				<div class="section p-5">
+					<h2 class="title is-5"><span class="mr-1"></span>Utenti Logggati</h2>
+					<p class="subtitle is-6">Qui puoi vedere tutti gli utenti loggati</p>
+				</div>
+				<div class="section pt-0 pb-5 pl-5 pr-5">
+					<a class="media media-chef" th:if="${!credentialsList.empty}" th:each="credentials : ${credentialsList}">
+						<div class="media-left">
+							<div class="media-left-badge">
+								<p th:text=" '#' + ${credentials.id}">#ID</p>
+							</div>
+						</div>
+						<div class="media-content">
+						   Username Utente: <p class="title is-6" th:text="${credentials.username}">Username User</p>
+						   Nome Utente: <p class="title is-6" th:text="${credentials.user.nome}">Nome User</p>
+						   Cognome Utente:<p class="title is-6" th:text="${credentials.user.cognome}">Cognome User</p>
+
+						</div>
+						<div class="media-right">
+							<form style="display: inline;" method="post"
+								th:action="@{'/admin/allUsers/'+${credentials.username}+'/delete'}">
+								<button class="button is-danger is-rounded " type="submit">Elimina </button>
+							</form>
+						</div>
+						<div class="media-right"><i class="fa-solid fa-chevron-right"></i></div>
+					</a>
+					<div th:unless="${!credentialsList.empty}">
+						<div th:replace="fragments/base.html :: alert(text='Non ci sono buffet registrati')" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer th:replace="fragments/base.html :: footer"></footer>
+	</div>
+</body>
+</html>
+            

@@ -1,0 +1,55 @@
+<html>
+
+<head th:replace="fragments/base.html :: headerfiles(title='Aggiungi buffet | Catering')">
+	<title>Aggiungi Piatto| Catering </title>
+</head>
+
+<body>
+	<div id="content">
+		<header th:replace="fragments/base.html :: navbar"></header>
+		<!--- MAIN -->
+		<div
+			th:replace="fragments/base.html :: page-title-section(image='/images/catering.webp',type='has-text-white',title='Registra un nuovo piatto per il Buffet '+${loggedBuffet.nome.toUpperCase()},subtitle='Puoi aggiungere tantissimi piatti')">
+		</div>
+		<div class="ct-flex-container">
+			<div class="ct-flex-item">
+				<div class="section p-5">
+					<h2 class="title is-5">Dettagli Piatto:</h2>
+					<p class="subtitle is-6">Stai creando un nuovo Piatto</p>
+				</div>
+				<div class="section pt-0 pb-4">
+					<form th:action="@{'/admin/'+${loggedBuffet.id}+'/registerPiatto'}" method="POST" th:object="${piattoForm}">
+							<div class="field">
+								<div class="control">
+								<label class="label">Nome</label>
+								<span><input class="input" type="text" placeholder="Nome Piatto"
+										th:field="*{nome}" required /></span>
+								</div>
+								<p class="has-text-left help is-danger" th:if= "${#fields.hasErrors('nome')}"
+									th:errors="*{nome}" th:style="'color:red'">
+ 						</div> 	
+						<div class="field">
+								<div class="control">
+								<label class="label">Descrizione</label>
+								<span><textarea th:field="*{descrizione}" class="textarea"
+										placeholder="Inserisci la descrizione del piatto" required></textarea></span>
+								</div>
+							<p class="has-text-left help is-danger" th:if= "${#fields.hasErrors('descrizione')}"
+									th:errors="*{descrizione}" th:style="'color:red'">
+ 						</div> 	
+						<div class="level is-mobile">
+							<div class="level-left">
+								<button class="button is-rounded is-info" type="submit">Salva</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			</div>
+		<footer th:replace="fragments/base.html :: footer"></footer>
+	</div>
+</body>
+
+</html>
+						
+

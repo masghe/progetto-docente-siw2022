@@ -1,0 +1,46 @@
+<html>
+
+<head th:replace="fragments/base.html :: headerfiles(title='Piatti | Catering')">
+	<title>Buffet | Catering </title>
+</head>
+
+<body>
+	<div id="content">
+		<header th:replace="fragments/base.html :: navbar"></header>
+		<!--- MAIN -->
+		<div
+			th:replace="fragments/base.html :: page-title-section(image='/images/chefs.webp',type='has-text-white',title='I Piatti del Buffet ' + ${loggedBuffet.nome.toUpperCase()},subtitle=${loggedBuffet.descrizione})">
+		</div>
+		<!--- MAIN -->
+		<div class="ct-flex-container">
+			<div class="ct-flex-item">
+				<div class="section p-5">
+					<h2 class="title is-5"><span class="mr-1">🍜 </span>Piatti disponibili</h2>
+					<p class="subtitle is-6">Qui puoi vedere tutti i Piatti proposti dal Buffet</p>
+				</div>
+				<div class="section pt-0 pb-5 pl-5 pr-5">
+					<a class="media media-chef" th:if="${!piattoList.empty}" th:each="loggedPiatto : ${piattoList}"
+						th:href="@{'/user/allPiatti/'+${loggedPiatto.id}+'/profile'}"  >
+						<div class="media-left">
+							<div class="media-left-badge">
+								<p th:text=" '#' + ${loggedPiatto.id}">#ID</p>
+							</div>
+						</div>
+						<div class="media-content">
+							<p class="title is-6" th:text="${loggedPiatto.nome}">Nome Piatto</p>
+							<p class="subtitle is-6" th:text="${loggedPiatto.descrizione}">Descrizione piatto</p>
+						</div>
+						<div class="media-right"><i class="fa-solid fa-chevron-right"></i></div>
+					</a>
+					<div th:unless="${!piattoList.empty}">
+						<div th:replace="fragments/base.html :: alert(text='Non ci sono piatti disponibili')" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer th:replace="fragments/base.html :: footer"></footer>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<html>
+
+<head th:replace="fragments/base.html :: headerfiles(title='Aggiungi buffet | Catering')">
+	<title>Aggiungi Ingrediente | Catering </title>
+</head>
+
+<body>
+	<div id="content">
+		<header th:replace="fragments/base.html :: navbar"></header>
+		<!--- MAIN -->
+		<div
+			th:replace="fragments/base.html :: page-title-section(image='/images/catering.webp',type='has-text-white',title='Registra un nuovo Ingrediente per il Piatto ' +${loggedPiatto.nome.toUpperCase()},subtitle='Puoi aggiungere tantissimi ingredienti')">
+		</div>
+		<div class="ct-flex-container">
+			<div class="ct-flex-item">
+				<div class="section p-5">
+					<h2 class="title is-5">Dettagli ingrediente</h2>
+					<p class="subtitle is-6">Stai creando un nuovo ingrediente</p>
+				</div>
+				<div class="section pt-0 pb-4">
+					<form th:action="@{'/admin/'+${loggedPiatto.id}+'/registerIngrediente'}" method="POST" th:object="${ingredienteForm}">
+							<div class="field">
+								<div class="control">
+								<label class="label">Nome</label>
+								<span><input class="input" type="text" placeholder="Nome Ingrediente"
+										th:field="*{nome}" required /></span>
+								</div>
+								<p class="has-text-left help is-danger" th:if= "${#fields.hasErrors('nome')}"
+									th:errors="*{nome}" th:style="'color:red'">
+ 						</div> 	
+ 						<div class="field">
+							<div class="control">
+								<label class="label">Origine</label>
+								<span><input class="input" type="text"  placeholder="es. Appennino Tosco-Emiliano"
+										th:field="*{origine}" required></input></span>
+							</div>
+							<p class="has-text-left help is-danger" th:if= "${#fields.hasErrors('origine')}"
+									th:errors="*{origine}" th:style="'color:red'">
+ 						</div> 	
+						<div class="field">
+								<div class="control">
+								<label class="label">Descrizione</label>
+								<span><textarea th:field="*{descrizione}" class="textarea"
+										placeholder="Inserisci la descrizione dell'ingrediente" required></textarea></span>
+								</div>
+							<p class="has-text-left help is-danger" th:if= "${#fields.hasErrors('descrizione')}"
+									th:errors="*{descrizione}" th:style="'color:red'">
+ 						</div> 	
+						<div class="level is-mobile">
+							<div class="level-left">
+								<button class="button is-rounded is-info" type="submit">Salva</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			</div>
+		<footer th:replace="fragments/base.html :: footer"></footer>
+	</div>
+</body>
+
+</html>

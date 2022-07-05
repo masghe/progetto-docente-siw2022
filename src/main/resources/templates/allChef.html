@@ -1,0 +1,53 @@
+<html>
+
+<head th:replace="fragments/base.html :: headerfiles(title='Chef | Catering')">
+	<title>Admin All Chef | Catering </title>
+</head>
+<body>
+	<div id="content">
+		<header th:replace="fragments/base.html :: navbar"></header>
+		<!--- MAIN -->
+		<div
+			th:replace="fragments/base.html :: page-title-section(image='/images/chefs.webp',type='has-text-white',title='Chef 👨🏻‍🍳',subtitle='Tutti gli chef a disposizione')">
+		</div>
+		<!--- MAIN -->
+		<div class="ct-flex-container">
+			<div class="ct-flex-item">
+				<div class="section p-5">
+					<h2 class="title is-5"><span class="mr-2">👨🏻‍🍳 </span> Scopri tutti gli chef</h2>
+					<p class="subtitle is-6">Di seguito troverai tutti gli chef, potrai scoprire i loro buffet e i loro
+						piatti.</p>
+				</div>
+				
+				
+				
+				<div class="section pt-0 pb-5 pl-5 pr-5">
+					<a th:if="${!chefList.empty}" th:each="chef : ${chefList}" class="media media-chef"
+						th:href="@{'/user/allChef/'+${chef.id}+'/profile'}">
+						<div class="media-left">
+							<div class="media-left-badge">
+								<p th:text=" '#' + ${chef.id}">#ID</p>
+							</div>
+						</div>
+						<div class="media-content">
+							<p class="title is-6" th:text="${chef.nome} + ' ' + ${chef.cognome}">Nome Cognome</p>
+							<p class="subtitle is-6" th:text="${chef.nazionalita}">Nazionalità</p>
+						</div>
+				
+							<div class="media-right"><i class="fa-solid fa-chevron-right"></i></div>
+					</a>
+					<div th:unless="${!chefList.empty}">
+						<div th:replace="fragments/base.html :: alert(text='Non ci sono chef registrati')" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<footer th:replace="fragments/base.html :: footer"></footer>
+	</div>
+</body>
+
+</html>
+
+
